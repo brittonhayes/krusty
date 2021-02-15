@@ -2,9 +2,14 @@
 name = "krusty"
 version = "0.1.0"
 authors = ["Britton Hayes <brittonhayes@users.noreply.github.com>"]
+description = "Dig up krusty old files taking up precious space"
+license = "MIT OR Apache-2.0"
+readme = "README.md"
+repository = "https://github.com/brittonhayes/krusty"
+homepage = "https://github.com/brittonhayes/krusty"
+keywords = ["cli", "clean", "utility", "helper"]
+categories = ["command-line-utilities"]
 edition = "2018"
-
-# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [dependencies]
 clap = "3.0.0-beta.2"
