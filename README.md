@@ -8,7 +8,7 @@
 How to install krusty
 
 ```shell
-cargo install --git https://github.com/brittonhayes/krusty
+cargo install --git https://github.com/brittonhayes/krusty --branch main
 ```
 
 ## Usage
@@ -16,7 +16,6 @@ cargo install --git https://github.com/brittonhayes/krusty
 How to use krusty
 
 ```shell
-
 # View help command
 krusty --help
 
