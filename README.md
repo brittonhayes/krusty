@@ -1,7 +1,7 @@
 # Krusty 🦀
 
 > Krusty looks through directories for files you haven't modified in a while
-> that could be taking up that precious space.
+> that could be taking up that sweet, sweet hard drive space.
 
 ## Installation
 
@@ -20,7 +20,7 @@ How to use krusty
 # View help command
 krusty --help
 
-# Run the program
-krusty crawl
+# Search for krusty files in a directory
+krusty crawl ./
 ```
 

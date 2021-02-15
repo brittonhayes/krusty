@@ -1,8 +1,8 @@
-use clap::App;
+use clap::{App, Arg};
 use colored::*;
 use error_chain::error_chain;
+use std::fs;
 use std::path::Path;
-use std::{env, fs};
 
 error_chain! {
     foreign_links {
@@ -15,18 +15,28 @@ fn main() {
     let matches = App::new("krusty")
         .version("0.1.0")
         .about("Finds those krusty old files cluttering up your system.")
-        .subcommand(App::new("crawl").about("looks around for anything worth deleting"))
+        .subcommand(
+            App::new("crawl")
+                .about("looks around for anything worth deleting")
+                .arg(
+                    Arg::new("directory")
+                        .about("the folder to read")
+                        .index(1)
+                        .required(true),
+                ),
+        )
         .get_matches();
 
-    if let Some(_matches) = matches.subcommand_matches("crawl") {
-        crawl();
+    if let Some(ref matches) = matches.subcommand_matches("crawl") {
+        let dir = matches.value_of("directory").unwrap();
+        let _ = crawl(dir.to_string());
     }
 }
 
 // crawl digs through the current directory
 // for old files
-fn crawl() -> Result<()> {
-    let current_dir = env::current_dir()?;
+fn crawl(dir: String) -> Result<()> {
+    let current_dir = Path::new(&dir);
     println!("Krusty files found in {:?}:\n", current_dir);
 
     for entry in fs::read_dir(current_dir)? {
@@ -43,7 +53,8 @@ fn crawl() -> Result<()> {
             .to_string()
             .red();
 
-        if last_modified < 1 * 3600 && metadata.is_file() {
+        // TODO make this a configurable time parameter
+        if last_modified < 1 * 1440 && metadata.is_file() {
             let lastmod: String = last_modified.to_string().cyan().to_string();
             println!(
                 "Filename: {}\nSize: {:?} KB\nLast modified: {} min ago\n---",
